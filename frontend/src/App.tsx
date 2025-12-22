@@ -5,7 +5,7 @@ import type {InferResponseType} from "hono/client";
 import { hc } from "hono/client";
 
 // Now we can use our api using the client interface instead of a fetch
-// This method allows are code to know the structure of the data we are using
+// This method allows the code to know the structure of the data we are using
 const client = hc<AppType>("/")
 
 function App() {

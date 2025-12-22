@@ -9,9 +9,11 @@ export default defineConfig({
       tailwindcss()
   ],
   server: {
+    host: true, // this is needed so we can access the site from the container
     proxy: {
       "/api": {
-        target: "http://localhost:3000",
+        // Need backend_dev because this is supposed to be running within the container
+        target: "http://backend_dev:3000",
         changeOrigin: false,
         secure: false
       }
