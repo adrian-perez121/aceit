@@ -32,4 +32,3 @@ issues open.
 frontend directories
 + To check if there are any problems with your code run `npm run lint`. This command will work with both the backend 
 and frontend directories
-+ 
