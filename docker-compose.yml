@@ -1,0 +1,55 @@
+services:
+  backend_dev:
+    profiles: ["dev"]
+    build:
+      context: ./backend
+      target: dev
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    command: ["npm", "run", "dev"]
+
+  backend_prod:
+    profiles: ["prod"]
+    build:
+      context: ./backend
+      target: prod
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    command: ["node", "dist/index.js"]
+
+  frontend_dev:
+    profiles: ["dev"]
+    build:
+      context: ./frontend
+      target: dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+      - HOST=0.0.0.0
+      - VITE_HOST=0.0.0.0
+    command: ["npm", "run", "dev"]
+    depends_on:
+      - backend_dev
+
+  frontend_prod:
+    profiles: [ "prod" ]
+    build:
+      context: ./frontend
+      target: prod
+    ports:
+      - "5173:80"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - backend_prod
