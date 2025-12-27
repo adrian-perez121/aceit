@@ -33,10 +33,6 @@ function App() {
             <button>
                 hello
             </button>
-            <button>
-                Good bye
-            </button>
-
         </>
     );
 }
