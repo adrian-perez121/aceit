@@ -32,3 +32,6 @@ issues open.
 frontend directories
 + To check if there are any problems with your code run `npm run lint`. This command will work with both the backend 
 and frontend directories
+
+## Finishing Up
+- When you are done coding for the day, run the following command: `docker compose --profile dev down --volumes`.
