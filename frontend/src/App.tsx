@@ -30,6 +30,13 @@ function App() {
             >
                 Welcome Message From Backend: {welcomeMessage}
             </div>
+            <button>
+                hello
+            </button>
+            <button>
+                Good bye
+            </button>
+
         </>
     );
 }
