@@ -33,5 +33,26 @@ frontend directories
 + To check if there are any problems with your code run `npm run lint`. This command will work with both the backend 
 and frontend directories
 
+## npm Install Instructions
+Inside your code editor, open up a new terminal. You should already be in the main aceit directory. For the backend, run: `cd backend`. For the frontend, run: `cd frontend`. Once you are in the correct directory, run: `npm install`.
+
+## Git Version Control
+To get the most up-to-date code from the main repository, run:
+- `git pull`
+
+To push modified code onto a new branch, run these in the terminal of your code editor:
+- `git branch` → checks current branch
+- `git branch name-of-your-branch` → creates a new branch
+- `git checkout name-of-your-branch` → switches to new branch
+- `git add [file directory]` → to stage changes
+   - For example, if you made changes to App.tsx, you would run:
+      - `git add frontend/src/App.tsx`
+- `git status` → checks what was staged
+- `git commit -m "add your message here"` 
+- `git push --set-upstream origin name-of-your-branch` → pushes changes to the new branch. 
+
+Once you have merged changes, pushed to main, and deleted the branch on GitHub, run the following in the terminal of your code editor:
+- `git branch -d name-of-your-branch` → Deletes branch. Basically, one you delete the branch on GitHub, you also have to delete that branch in your code editor too. If there is a simpler process where we can achieve this in one step, this will be updated.
+
 ## Finishing Up
 - When you are done coding for the day, run the following command: `docker compose --profile dev down --volumes`.
