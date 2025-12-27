@@ -7,11 +7,11 @@ import tanstackRouter from "@tanstack/router-plugin/vite";
 export default defineConfig({
     plugins: [
         tanstackRouter({
-            target: 'react',
+            target: "react",
             autoCodeSplitting: true,
         }),
         react(),
-        tailwindcss()
+        tailwindcss(),
     ],
     server: {
         host: true, // this is needed so we can access the site from the container
