@@ -53,3 +53,15 @@ services:
       - NODE_ENV=production
     depends_on:
       - backend_prod
+
+  postgre:
+    profiles: ["dev"]
+    image: postgres:latest
+    restart: unless-stopped
+    container_name: database
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=aceit

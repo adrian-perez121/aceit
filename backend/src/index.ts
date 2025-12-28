@@ -4,32 +4,34 @@ import { Hono } from "hono";
 const app = new Hono();
 
 const route = app.get("/api", (c) => {
-  return c.text("Hello Hono, coming from node.js!");
+    return c.text("Hello Hono, coming from node.js!");
 });
 
 const server = serve(
-  {
-    fetch: app.fetch,
-    port: 3000,
-  },
-  (info) => {
-    console.log(`Server is running on http://localhost:${info.port}`);
-  },
+    {
+        fetch: app.fetch,
+        port: 3000,
+    },
+    (info) => {
+        console.log(
+            `Server is running on http://localhost:${info.port}`
+        );
+    }
 );
 
 // graceful shutdown
 process.on("SIGINT", () => {
-  server.close();
-  process.exit(0);
+    server.close();
+    process.exit(0);
 });
 process.on("SIGTERM", () => {
-  server.close((err: any) => {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-    process.exit(0);
-  });
+    server.close((err: any) => {
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        }
+        process.exit(0);
+    });
 });
 
 // For now we are only exporting one type of route
