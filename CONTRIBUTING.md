@@ -6,10 +6,13 @@ of docker.
 ## Getting Started
 1. **Setting Up Docker:** First you have to start the docker development environment using `docker compose --profile dev up --build -d`.
     - This creates two containers (one for the frontend and one for the backend). 
-    - Two volumes are also created and mounted with the local code. 
+    - Two volumes are  created and mounted with the local code. 
     Hence, if you make any changes, these changes will be passed into the container
+    - A third volume is also created; this one holds the database. If you starting fresh, then you will want to 
+   update the database with the tables the project is currently using. Do to this run `npm db:migrate`. This will build 
+   the tables into the postgre database running inside of the database container.
     - If you like to view the logs occurring in each container, you can run `docker logs -f backend_dev` and
-      `docker logs -f frontend_dev` in different terminals.
+      `docker logs -f frontend_dev` in different terminals
 2. **Check your existing issues:** Before you get to work on something new, please make sure that you don't have any existing
 issues open.
 3. **Creating an issue:** This your unit of work
@@ -26,6 +29,12 @@ issues open.
    + Branch names should include your first name + / + the feature you are working on. Ex `adrian/add-user-login`
 3. **Commit Messages**
    + Commit messages should short but descriptive and reflective of the changes being made in the code.
+
+## If You Are Working On The Database
+- If you update `schema.ts` make sure to always generate a migration using `npm run db:migrate`. This way any one
+else looking to make changes can run the migrate command and have the latest version of our database.
+- If you would like to look into the database, you can use the GUI created by Drizzle. To do this run `npm run db:studio`
+and click on the localhost link. Now you can view the tables and their data.
 
 ## Code Formatting
 +  To make sure your code is formatted correctly run `npm run format`. This command works in both the backend and 
