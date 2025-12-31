@@ -9,10 +9,10 @@ of docker.
     - Two volumes are  created and mounted with the local code. 
     Hence, if you make any changes, these changes will be passed into the container
     - A third volume is also created; this one holds the database. If you starting fresh, then you will want to 
-   update the database with the tables the project is currently using. Do to this run `npm db:migrate`. This will build 
+   update the database with the tables the project is currently using. Do to this run `npm run db:migrate`. This will build 
    the tables into the postgre database running inside of the database container.
-    - If you like to view the logs occurring in each container, you can run `docker logs -f backend_dev` and
-      `docker logs -f frontend_dev` in different terminals
+    - If you like to view the logs occurring in each container, you can run `docker logs -f aceit-backend_dev-1` and
+      `docker logs -f aceit-frontend_dev-1` in different terminals
 2. **Check your existing issues:** Before you get to work on something new, please make sure that you don't have any existing
 issues open.
 3. **Creating an issue:** This your unit of work
