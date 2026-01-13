@@ -1,11 +1,14 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
+import { auth } from "./lib/auth.js";
 
-const app = new Hono();
+const app = new Hono().basePath("/api");
 
-const route = app.get("/api", (c) => {
-    return c.text("Hello Hono, coming from node.js!");
-});
+const route = app
+    .on(["POST", "GET"], "/auth/*", (c) => auth.handler(c.req.raw))
+    .get("", (c) => {
+        return c.text("Hello Hono, coming from node.js!");
+    });
 
 const server = serve(
     {
