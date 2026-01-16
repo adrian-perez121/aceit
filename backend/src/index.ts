@@ -6,7 +6,7 @@ const app = new Hono().basePath("/api");
 
 const route = app
     .on(["POST", "GET"], "/auth/*", (c) => auth.handler(c.req.raw))
-    .get("", (c) => {
+    .get("/", (c) => {
         return c.text("Hello Hono, coming from node.js!");
     });
 
