@@ -9,10 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AllUsersRouteImport } from './routes/all-users'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExamplesIndexRouteImport } from './routes/examples/index'
 import { Route as ExamplesIdRouteImport } from './routes/examples/$id'
+import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
 
+const AllUsersRoute = AllUsersRouteImport.update({
+  id: '/all-users',
+  path: '/all-users',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -28,39 +35,70 @@ const ExamplesIdRoute = ExamplesIdRouteImport.update({
   path: '/examples/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthSignUpRoute = AuthSignUpRouteImport.update({
+  id: '/auth/sign-up',
+  path: '/auth/sign-up',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/all-users': typeof AllUsersRoute
+  '/auth/sign-up': typeof AuthSignUpRoute
   '/examples/$id': typeof ExamplesIdRoute
   '/examples': typeof ExamplesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/all-users': typeof AllUsersRoute
+  '/auth/sign-up': typeof AuthSignUpRoute
   '/examples/$id': typeof ExamplesIdRoute
   '/examples': typeof ExamplesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/all-users': typeof AllUsersRoute
+  '/auth/sign-up': typeof AuthSignUpRoute
   '/examples/$id': typeof ExamplesIdRoute
   '/examples/': typeof ExamplesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/examples/$id' | '/examples'
+  fullPaths:
+    | '/'
+    | '/all-users'
+    | '/auth/sign-up'
+    | '/examples/$id'
+    | '/examples'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/examples/$id' | '/examples'
-  id: '__root__' | '/' | '/examples/$id' | '/examples/'
+  to: '/' | '/all-users' | '/auth/sign-up' | '/examples/$id' | '/examples'
+  id:
+    | '__root__'
+    | '/'
+    | '/all-users'
+    | '/auth/sign-up'
+    | '/examples/$id'
+    | '/examples/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AllUsersRoute: typeof AllUsersRoute
+  AuthSignUpRoute: typeof AuthSignUpRoute
   ExamplesIdRoute: typeof ExamplesIdRoute
   ExamplesIndexRoute: typeof ExamplesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/all-users': {
+      id: '/all-users'
+      path: '/all-users'
+      fullPath: '/all-users'
+      preLoaderRoute: typeof AllUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -82,11 +120,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExamplesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/sign-up': {
+      id: '/auth/sign-up'
+      path: '/auth/sign-up'
+      fullPath: '/auth/sign-up'
+      preLoaderRoute: typeof AuthSignUpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AllUsersRoute: AllUsersRoute,
+  AuthSignUpRoute: AuthSignUpRoute,
   ExamplesIdRoute: ExamplesIdRoute,
   ExamplesIndexRoute: ExamplesIndexRoute,
 }

@@ -16,7 +16,6 @@ function RouteComponent() {
         queryFn: async () => {
             const resp = await client.api.$get();
             if (!resp.ok) throw new Error("failed to query the root");
-            console.log("this runs");
             return resp.text();
         },
     });

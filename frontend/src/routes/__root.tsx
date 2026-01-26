@@ -4,12 +4,15 @@ import {
     createRootRoute,
     Link,
 } from "@tanstack/react-router";
+import { authClient } from "../lib/auth-client.ts";
 
 export const Route = createRootRoute({
     component: RootComponent,
 });
 
 function RootComponent() {
+    const { data: session } = authClient.useSession();
+
     return (
         <React.Fragment>
             <div className={"text-emerald-900 bg-emerald-200"}>
@@ -25,6 +28,24 @@ function RootComponent() {
                     {" "}
                     Examples{" "}
                 </Link>
+                <Link className={"underline"} to={"/auth/sign-up"}>
+                    {" "}
+                    Sign Up{" "}
+                </Link>
+                <Link className={"underline"} to={"/all-users"}>
+                    {" "}
+                    Users (FOR DEV PURPOSES ONLY){" "}
+                </Link>
+
+                {session && (
+                    <button
+                        onClick={() => {
+                            authClient.signOut();
+                        }}
+                    >
+                        Sign Out
+                    </button>
+                )}
             </div>
             <Outlet />
         </React.Fragment>

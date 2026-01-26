@@ -19,7 +19,7 @@ export default defineConfig({
             "/api": {
                 // Need backend_dev because this is supposed to be running within the container
                 target: "http://backend_dev:3000",
-                changeOrigin: false,
+                changeOrigin: true,
                 secure: false,
             },
         },
