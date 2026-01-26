@@ -1,15 +1,39 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { auth } from "./lib/auth.js";
+import { cors } from "hono/cors";
+import { db } from "./db/db.js";
 
 const app = new Hono().basePath("/api");
+
+const CLIENT_URL = process.env.CLIENT_URL!;
+
+app.use(
+    "*",
+    cors({
+        origin: CLIENT_URL,
+        allowHeaders: [
+            "Content-Type",
+            "Authorization",
+            "X-Custom-Header",
+            "Upgrade-Insecure-Requests",
+        ],
+        allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        exposeHeaders: ["Content-Length", "X-Kuma-Revision"],
+        maxAge: 600,
+        credentials: true,
+    })
+);
 
 const route = app
     .on(["POST", "GET"], "/auth/*", (c) => auth.handler(c.req.raw))
     .get("/", (c) => {
         return c.text("Hello Hono, coming from node.js!");
+    })
+    .get("/users", async (c) => {
+        const users = await db.query.user.findMany(); // getting all the users
+        return c.json(users);
     });
-
 const server = serve(
     {
         fetch: app.fetch,
